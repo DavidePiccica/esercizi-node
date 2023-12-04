@@ -1,32 +1,30 @@
 function luckyDraw(player) {
-    return new Promise((resolve, reject) => {
-      const win = Boolean(Math.round(Math.random()));
-  
-      process.nextTick(() => {
-        if (win) {
-          resolve(`${player} won a prize in the draw!`);
-        } else {
-          reject(new Error(`${player} lost the draw.`));
-        }
-      });
+  return new Promise((resolve, reject) => {
+    const win = Boolean(Math.round(Math.random()));
+
+    process.nextTick(() => {
+      if (win) {
+        resolve(`${player} won a prize in the draw!`);
+      } else {
+        reject(new Error(`${player} lost the draw.`));
+      }
     });
-  }
-
-  function playLuckyDraw(player) {
-    return luckyDraw(player)
-      .then((result) => {
-        console.log(result);
-        return result;
-      })
-      .catch((error) => {
-        console.error(error.message);
-        throw error;
-      });
-  }
-
-  playLuckyDraw("Joe")
-  .then(() => playLuckyDraw("Caroline"))
-  .then(() => playLuckyDraw("Sabrina"))
-  .catch((error) => {
-    console.error( error.message);
   });
+}
+
+async function getResults() {
+  try {
+    const resultTina = await luckyDraw("Tina");
+    console.log(resultTina);
+
+    const resultJorge = await luckyDraw("Jorge");
+    console.log(resultJorge);
+
+    const resultJulien = await luckyDraw("Julien");
+    console.log(resultJulien);
+  } catch (error) {
+    console.error("Error ", error.message);
+  }
+}
+
+getResults();
