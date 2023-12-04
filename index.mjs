@@ -1,14 +1,32 @@
-import * as fs from 'node:fs';
-import { Buffer } from 'node:buffer';
-
-const dataToWrite = "Hello world";
-const newFileName = 'Hello.txt';
-const data = Buffer.from(dataToWrite, 'utf-8');
-
-fs.writeFile(newFileName, data, function (error) {
-  if (error) {
-    console.error('Error in compilation', error);
-    return error;
+function luckyDraw(player) {
+    return new Promise((resolve, reject) => {
+      const win = Boolean(Math.round(Math.random()));
+  
+      process.nextTick(() => {
+        if (win) {
+          resolve(`${player} won a prize in the draw!`);
+        } else {
+          reject(new Error(`${player} lost the draw.`));
+        }
+      });
+    });
   }
-  console.log('File saved!');
-});
+
+  function playLuckyDraw(player) {
+    return luckyDraw(player)
+      .then((result) => {
+        console.log(result);
+        return result;
+      })
+      .catch((error) => {
+        console.error(error.message);
+        throw error;
+      });
+  }
+
+  playLuckyDraw("Joe")
+  .then(() => playLuckyDraw("Caroline"))
+  .then(() => playLuckyDraw("Sabrina"))
+  .catch((error) => {
+    console.error( error.message);
+  });
