@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "ESERCIZI_NODE",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "ESERCIZI_NODE/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
