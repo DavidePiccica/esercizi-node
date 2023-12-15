@@ -34,9 +34,15 @@ export const signUp = async (req: Request, res: Response) => {
       res.status(409).json({ msg: "Choose another username" });
     } else {
       const { id } = await db.one(`INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id`,[username, password]);
-      
+
       res.status(201).json({ id, msg: "User created successfully" });
     }
   };
   
+  export const logOut = async (req: Request, res: Response) => {
+    const user = req.user;
+    const userId = (user as any).id;
+    await db.none(`UPDATE users SET token=$2 WHERE id=$1`,[userId,null])
+    res.status(200).json({msg:"Logout made"})
+  }
  

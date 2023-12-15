@@ -3,7 +3,9 @@ import dotenv from "dotenv"
 import morgan from "morgan";
 import multer from "multer"
 import {getAllPlanets, getPlanet, createPlanet, updatePlanet, deletePlanet,createPlanetImage}  from "./controller/planets.js"
-import { logIn,signUp } from "./controller/users.js";
+import { logIn,signUp,logOut } from "./controller/users.js";
+import { authorize } from "./authorize.js";
+import "./passport.js"
 
 const storage = multer.diskStorage({
   destination:(req,file,cb) =>{
@@ -28,6 +30,7 @@ app.delete('/api/planets/:id', deletePlanet)
 app.post('/api/planets/:id/image',upload.single("image"),createPlanetImage)
 app.post('/api/users/login',logIn)
 app.post('/api/users/signup', signUp)
+app.post('/api/users/logout',authorize, logOut)
 
 
 app.listen(port, () => {

@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 import passport from "passport"
 import passportJWT from "passport-jwt"
-import { db } from "./db"
+import { db } from "./db.js"
 
 
 dotenv.config()
