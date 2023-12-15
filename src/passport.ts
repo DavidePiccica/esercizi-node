@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 import passport from "passport"
 import passportJWT from "passport-jwt"
 import { db } from "./db"
-import { log } from "console"
+
 
 dotenv.config()
 const {SECRET}=process.env
